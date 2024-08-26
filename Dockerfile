@@ -1,13 +1,13 @@
-FROM python:3.7-alpine
-LABEL author=KHAJA
-LABEL blog=directdevops.blog
+FROM gcr.io/distroless/python3
+LABEL author="bhanu" project="sudent cource python"
 ARG HOME_DIR='/studentcourses'
 ADD . $HOME_DIR
-ENV MYSQL_USERNAME='directdevops'
-ENV MYSQL_PASSWORD='directdevops'
-ENV MYSQL_SERVER='localhost'
-ENV MYSQL_SERVER_PORT='3306'
-ENV MYSQL_DATABASE='test'
+ENV MYSQL_USERNAME=bhanu \
+    MYSQL_PASSWORD=root \
+    MYSQL_SERVER=localhost \
+    MYSQL_SERVER_PORT=3306 \
+    MYSQL_DATABASE=test \
+    MYSQL_ROOT_PASSWORD=root
 EXPOSE 8080
 WORKDIR $HOME_DIR
 RUN pip install -r requirements.txt

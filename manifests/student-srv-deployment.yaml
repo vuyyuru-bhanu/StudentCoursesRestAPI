@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-srv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: student-srv
+  template:
+    metadata:
+      labels:
+        app: student-srv
+    spec:
+      containers:
+        - name: student-srv
+          image: bhanu3333/studentapp
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MYSQL_SERVER
+              value: "student-db"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: student-srv
+spec:
+  selector:
+    app: student-srv
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8080
+  type: NodePort
